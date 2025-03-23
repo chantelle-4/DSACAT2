@@ -1,89 +1,86 @@
-public class Linked_List {
+public class linkedlist {
 
-    // A private nested class that represents each node in the linked list.
-    // Each node stores an integer value and a pointer to the next node.
-    private static class Node {
-        int data;
+    class Node {
+        int value;
         Node next;
 
-        // Creates a new node with the given integer value.
-        Node(int data) {
-            this.data = data;
-            this.next = null;
+        Node(int value) {
+            this.value = value;
+            this.next= null;
+
         }
     }
-
-    // 'head' points to the first node in the list (or null if the list is empty).
     private Node head;
-
-    // Initializes an empty linked list.
-    public Linked_List() {
-        head = null;
-    }
-
-    // Inserts a new node at the front of the list.
-    public void insertAtBeginning(int data) {
-        Node newNode = new Node(data);
-        newNode.next = head; // Link the new node to the old head
-        head = newNode;      // The new node becomes the new head
-    }
-
-    // Inserts a new node at the end of the list.
-    public void insertAtEnd(int data) {
-        Node newNode = new Node(data);
+    //Insert a mode at the beginning
+    public void addFirst(int value) {
+        Node newNode = new Node(value);
         if (head == null) {
-            // If the list is empty, make the new node the head.
             head = newNode;
         } else {
-            // Otherwise, walk through the list until the last node.
-            Node current = head;
-            while (current.next != null) {
-                current = current.next;
-            }
-            // Attach the new node at the end.
-            current.next = newNode;
-        }
-    }
+            newNode.next = head;
+            head = newNode;
 
-    // Removes the node at the beginning of the list.
-    // If the list is empty, it prints a message instead.
-    public void deleteFromBeginning() {
+        }
+        System.out.println(value + " added at the beginning.");
+    }
+    //insert node at the end
+    public void addLast(int value) {
+        Node newNode = new Node (value);
         if (head == null) {
-            System.out.println("List is empty. Nothing to delete.");
+            head = newNode;
+
         } else {
-            // Move 'head' to the next node, effectively removing the first node.
+            Node current = head;
+            while (current.next != null){
+                current = current.next;
+
+            }
+            current.next = newNode;
+
+
+        }
+        System.out.println(value + " added at the end.");
+
+    }
+    //delete a node from the beginning
+    public void removeFirst() {
+        if (head == null) {
+            System.out.println("list is empty.nothing to remove.");
+
+        } else {
+            System.out.println(head.value + " remove at the beginning.");
             head = head.next;
+
         }
     }
+    //display the linked list
+    public void showList() {
+        if (head == null) {
+            System.out.println("list is empty.");
+            return;
 
-    // Prints the entire list, starting from 'head' and following each 'next' link.
-    public void printList() {
-        Node current = head;
-        while (current != null) {
-            System.out.print(current.data + " -> ");
-            current = current.next;
         }
-        System.out.println("null"); // Mark the end of the list.
+        Node temp = head;
+        System.out.println("linked list:");
+        while (temp != null) {
+            System.out.println(temp.value + "->");
+            temp = temp.next;
+
+
+        }
+        System.out.println("NULL");
+
     }
+    //Main method
+    public static void main(String[]args) {
+        linkedlist myList = new linkedlist();
+        myList.addFirst(100);
+        myList.addFirst(70);
+        myList.addLast(30);
+        myList.showList();
 
-    // A basic test to show that insertions and deletions work as expected.
-    public static void main(String[] args) {
-        Linked_List list = new Linked_List();
-
-        // Insert a couple of elements at the front.
-        list.insertAtBeginning(10);
-        list.insertAtBeginning(20);
-
-        // Insert one element at the end.
-        list.insertAtEnd(30);
-
-        // Print the list to verify the insertions.
-        System.out.println("Linked List after insertions:");
-        list.printList(); // Expected: 20 -> 10 -> 30 -> null
-
-        // Remove the first element and print the list again.
-        list.deleteFromBeginning();
-        System.out.println("Linked List after deletion from beginning:");
-        list.printList(); // Expected: 10 -> 30 -> null
+        myList.removeFirst();
+        myList.showList();
     }
 }
+
